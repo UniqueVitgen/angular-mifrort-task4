@@ -3,20 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MyFormComponent } from './my-form/my-form.component';
+import { MyFormComponent } from './components/my-form/my-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MaterialModule} from './material/material.module';
-import { TableComponent } from './table/table.component';
+import {MaterialModule} from './modules/material/material.module';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
-import { ContainerComponent } from './container/container.component';
+import { ContainerComponent } from './components/container/container.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
+import {DirectiveModule} from './modules/directive/directive.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyFormComponent,
-    TableComponent,
-    ContainerComponent
+    ContainerComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -25,9 +26,8 @@ import { ContainerComponent } from './container/container.component';
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
+    DirectiveModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

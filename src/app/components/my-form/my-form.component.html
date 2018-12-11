@@ -1,0 +1,58 @@
+<form>
+  <mat-card [formGroup]="myForm">
+    <ng-container *ngFor="let item of config" [ngSwitch]="item.type">
+        <div class="row">
+          <div class="col-6">
+            <ng-container *ngSwitchCase="'string'">
+            <mat-form-field class="full-width">
+              <input [formControlName]="item.name" matInput [placeholder]="item.name"/>
+            </mat-form-field>
+            </ng-container>
+            <ng-container *ngSwitchCase="'confirm'">
+              <mat-form-field class="full-width">
+                <input [formControlName]="item.name" matInput [placeholder]="item.name"/>
+              </mat-form-field>
+            </ng-container>
+            <ng-container *ngSwitchCase="'number'">
+              <mat-form-field class="full-width">
+                <input only-numbers [formControlName]="item.name" matInput type="number" [placeholder]="item.name"/>
+              </mat-form-field>
+            </ng-container>
+            <ng-container *ngSwitchCase="'select'">
+              <mat-form-field class="full-width">
+                <mat-select [formControlName]="item.name">
+                  <mat-option *ngFor="let option of item.options" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+          </div>
+          <div class="col-6 error-text-container">
+            <div *ngIf="myForm.get(item.name).touched">
+              <ul>
+                <li *ngIf="myForm.get(item.name).hasError('email')">
+                  <mat-error>{{myForm.get(item.name).getError('email') ? 'is not valid Email': ''}}</mat-error>
+                </li>
+                <li *ngIf="myForm.get(item.name).hasError('required')">
+                  <mat-error>{{myForm.get(item.name).getError('required') ? item.name + ' is required': ''}}</mat-error>
+                </li>
+                <!--<li *ngIf="myForm.hasError('notSame') && item.confirmatorProp === item.name">-->
+                  <!--<mat-error *ngIf="item.confirmatorProp === item.name">{{myForm.hasError('notSame') ? item.name + ' don\' match ' + item.confirmableProp: ''}}</mat-error>-->
+                <!--</li>-->
+                <li *ngIf="myForm.get(item.name).hasError('notSame')">
+                  <mat-error *ngIf="item.confirmatorProp === item.name">{{item.name + ' don\'t match ' + item.confirmableProp}}</mat-error>
+                </li>
+                <li *ngIf="myForm.get(item.name).hasError('min')">
+                  <mat-error>{{myForm.get(item.name).hasError('min') ? item.name + ' must be higher or equal than ' + myForm.get(item.name).getError('min').min: ''}}</mat-error>
+                </li>
+                <li *ngIf="myForm.get(item.name).hasError('max')">
+                  <mat-error>{{myForm.get(item.name).hasError('max') ? item.name + ' must be lower or equal than ' + myForm.get(item.name).getError('max').max: ''}}</mat-error>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </ng-container>
+  </mat-card>
+</form>

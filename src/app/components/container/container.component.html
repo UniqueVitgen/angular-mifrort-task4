@@ -1,0 +1,9 @@
+<div class="container">
+  <br>
+  <mat-card>
+    <h2 class="text-center">Reactive Form App</h2>
+    <app-my-form (ngModelChange)="changeUser()" [config]="config" [(ngModel)]="user"></app-my-form>
+    <br>
+    <app-user-info [user]="user"></app-user-info>
+  </mat-card>
+</div>
