@@ -32,7 +32,6 @@ export class MyFormComponent implements OnInit, OnChanges,  ControlValueAccessor
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.config);
     this.myForm = this.formBuilder.group({});
     for (const item of this.config) {
       this.myForm.addControl(item.name, this.formBuilder.control('', Validators.compose(<any>item.validators)));
@@ -41,11 +40,9 @@ export class MyFormComponent implements OnInit, OnChanges,  ControlValueAccessor
       }
     }
     this.myForm.valueChanges.subscribe(resObject => {
-      console.log('form', resObject);
       this.outputOnChange.emit(resObject);
       this.propagateChange(resObject);
     });
-    // this.myForm = this.formBuilder.group({});
   }
   writeValue(_user: any) {
     if ( _user ) {
@@ -60,11 +57,4 @@ export class MyFormComponent implements OnInit, OnChanges,  ControlValueAccessor
 
   onChange(event) {
   }
-    // for(let )
-    // this.myForm = this.formBuilder.group({});
-    // this.myForm.addControl('name', new FormControl('', [Validators.compose(Validators.required())]));
-    // this.myForm.valueChanges.subscribe(res => {
-    //   console.log(this.myForm);
-    //   this.outputOnChange.emit(res);
-    // });
 }

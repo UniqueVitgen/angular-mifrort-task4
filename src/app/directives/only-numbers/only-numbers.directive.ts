@@ -17,16 +17,17 @@ export class OnlyNumbersDirective {
   @HostListener('keydown', [ '$event' ])
   onKeyDown(event: KeyboardEvent) {
       // Allow Backspace, tab, end, and home keys
+    console.log(event);
       if (this.specialKeys.indexOf(event.key) !== -1) {
           return;
       }
 
       // Do not use event.keycode this is deprecated.
       // See: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-      let current: string = this.el.nativeElement.value;
+      const current: string = this.el.nativeElement.value;
       // We need this because the current value on the DOM element
       // is not yet updated with the value from this event
-      let next: string = current.concat(event.key);
+      const next: string = current.concat(event.key);
       if (next && !String(next).match(this.regex)) {
           event.preventDefault();
       }

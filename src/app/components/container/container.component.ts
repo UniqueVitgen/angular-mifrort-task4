@@ -27,7 +27,7 @@ export class ContainerComponent implements OnInit {
     },
     {
       type: 'confirm',
-      name: 'confirm',
+      name: 'confirm Email',
       confirmableProp: 'email',
       confirmatorProp: 'confirm',
       validators: []
@@ -50,7 +50,6 @@ export class ContainerComponent implements OnInit {
   changeUser() {
     this.countChanges ++;
     console.log(this.countChanges);
-    // this.user = user;
   }
 
 }

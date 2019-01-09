@@ -1,5 +1,5 @@
 <form>
-  <mat-card [formGroup]="myForm">
+  <mat-card *ngIf="myForm" [formGroup]="myForm">
     <ng-container *ngFor="let item of config" [ngSwitch]="item.type">
         <div class="row">
           <div class="col-6">
