@@ -44,10 +44,10 @@ export class ContainerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.user = new User();
   }
-  changeUser() {
+  changeUser(): void {
     this.countChanges ++;
     console.log(this.countChanges);
   }

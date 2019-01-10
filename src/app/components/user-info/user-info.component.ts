@@ -12,9 +12,9 @@ export class UserInfoComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
-  strignifyUser(user: User) {
+  strignifyUser(user: User): string {
     return JSON.stringify(user).replace(/,/g, ', \n');
   }
   ngOnChanges(changes: SimpleChanges): void {

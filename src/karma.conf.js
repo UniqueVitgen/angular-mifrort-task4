@@ -47,7 +47,7 @@ module.exports = function (config) {
         error: 'x'
       }
     },
-    reporters: ['progress', 'kjhtml', 'spec', 'mocha', 'coverage-istanbul'],
+    reporters: ['progress', 'kjhtml', 'mocha', 'coverage-istanbul'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_ERROR,

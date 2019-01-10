@@ -17,7 +17,7 @@ const customValueProvider = {
   styleUrls: ['./my-form.component.scss'],
   providers: [customValueProvider]
 })
-export class MyFormComponent implements OnInit, OnChanges,  ControlValueAccessor {
+export class MyFormComponent implements  OnChanges,  ControlValueAccessor {
 
   constructor(private formBuilder: FormBuilder,
               private validateService: ValidateService) {
@@ -27,9 +27,6 @@ export class MyFormComponent implements OnInit, OnChanges,  ControlValueAccessor
   @Output('onChange') outputOnChange: EventEmitter<any> = new EventEmitter();
   myForm: FormGroup;
   propagateChange: any = () => {};
-
-  ngOnInit() {
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.myForm = this.formBuilder.group({});
@@ -50,11 +47,11 @@ export class MyFormComponent implements OnInit, OnChanges,  ControlValueAccessor
     }
   }
 
-  registerOnChange(fn) {
+  registerOnChange(fn): void {
     this.propagateChange = fn;
   }
   registerOnTouched(fn: () => void): void { }
 
-  onChange(event) {
+  onChange(event): void {
   }
 }
