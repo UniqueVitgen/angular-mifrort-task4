@@ -4,6 +4,7 @@ import {SkillEnum} from '../../enums/skill-enum.enum';
 import {User} from '../../classes/user';
 import {ConfigForm} from '../../classes/config-form';
 import {ValidateService} from '../../services/validate/validate.service';
+import {UserInterface} from '../../interfaces/user';
 
 const customValueProvider = {
   provide: NG_VALUE_ACCESSOR,
@@ -17,21 +18,21 @@ const customValueProvider = {
   styleUrls: ['./my-form.component.scss'],
   providers: [customValueProvider]
 })
-export class MyFormComponent implements  OnChanges,  ControlValueAccessor {
+export class MyFormComponent implements  ControlValueAccessor {
 
   constructor(private formBuilder: FormBuilder,
               private validateService: ValidateService) {
   }
-  @Input() userObject: object;
-  @Input() config: ConfigForm[];
-  @Output('onChange') outputOnChange: EventEmitter<any> = new EventEmitter();
-  myForm: FormGroup;
-  propagateChange: any = () => {};
-  propagateTouched: any = () => {};
-
-  ngOnChanges(changes: SimpleChanges): void {
+  private _config: ConfigForm[];
+  @Input() userObject: UserInterface;
+  @Input()
+  get config(): ConfigForm[] {
+    return this._config;
+  }
+  set config(value: ConfigForm[]) {
+    this._config = value;
     this.myForm = this.formBuilder.group({});
-    for (const item of this.config) {
+    for (const item of this._config) {
       this.myForm.addControl(item.name, this.formBuilder.control('', Validators.compose(<ValidatorFn[]>item.validators)));
       if (item.type === 'confirm') {
         this.myForm.setValidators(this.validateService.checkByEquals(item.confirmableProp, item.name));
@@ -42,7 +43,11 @@ export class MyFormComponent implements  OnChanges,  ControlValueAccessor {
       this.propagateChange(resObject);
     });
   }
-  writeValue(_user: object): void {
+  @Output('onChange') outputOnChange: EventEmitter<any> = new EventEmitter();
+  myForm: FormGroup;
+  propagateChange: any = () => {};
+  propagateTouched: any = () => {};
+  writeValue(_user: UserInterface): void {
     if ( _user ) {
       this.userObject = _user;
     }

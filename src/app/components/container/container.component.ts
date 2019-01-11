@@ -27,7 +27,7 @@ export class ContainerComponent implements OnInit {
     },
     {
       type: 'confirm',
-      name: 'confirm Email',
+      name: 'confirm',
       confirmableProp: 'email',
       confirmatorProp: 'confirm',
       validators: []
