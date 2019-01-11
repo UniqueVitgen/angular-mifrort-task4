@@ -7,13 +7,13 @@ import {AbstractControl, FormGroup} from '@angular/forms';
 export class ValidateService {
   checkByEquals(confirmedProp: string, confirmProp: string) {
     // here we have the 'passwords' group
-    return function (AC: AbstractControl) {
-      const password = AC.get(confirmedProp).value; // to get value in input tag
-      const confirmPassword = AC.get(confirmProp).value; // to get value in input tag
+    return function (abstractControl: AbstractControl) {
+      const password = abstractControl.get(confirmedProp).value; // to get value in input tag
+      const confirmPassword = abstractControl.get(confirmProp).value; // to get value in input tag
       if (password === confirmPassword) {
-        AC.get(confirmProp).setErrors(null);
+        abstractControl.get(confirmProp).setErrors(null);
       } else {
-        AC.get(confirmProp).setErrors({
+        abstractControl.get(confirmProp).setErrors({
           notSame: true,
           target: confirmedProp
         });
